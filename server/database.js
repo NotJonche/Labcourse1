@@ -16,9 +16,9 @@ const databaz = new Sequelize(
 let connectToDatabase = async () => {
   try {
     await databaz.authenticate();
-    console.log("✅ Connected to the database");
+    console.log("Connected to the database");
   } catch (err) {
-    console.error("❌ Database connection failed:", err);
+    console.error("Database connection failed:", err);
   }
 };
 
