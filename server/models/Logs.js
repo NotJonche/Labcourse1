@@ -20,5 +20,7 @@ Log.init(
     timestamps: false,
   }
 );
-
+Log.associate = (models) => {
+  Log.belongsTo(models.User, { foreignKey: "user_id" });
+};
 module.exports = Log;
