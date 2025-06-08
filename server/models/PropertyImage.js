@@ -1,31 +1,29 @@
-// const { databaz } = require("../database");
-// const { DataTypes } = require("sequelize/lib/sequelize");
+const { Model, DataTypes } = require("sequelize");
+const { databaz } = require("../database");
 
-// class PropertyImage extends Model {}
-// PropertyImage.init(
-//     {
-//       image_id: {
-//         type: DataTypes.INTEGER,
-//         primaryKey: true,
-//         autoIncrement: true,
-//       },
-//       property_id: DataTypes.INTEGER,
-//       image_url: DataTypes.STRING,
-//       uploaded_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
-//     },
-//     {
-//       timestamps: false,
-//       tableName: "property_images",
-//     }
-//     {
-//       sequelize: database,
-//       modelName: "PropertyImage",
-//       tableName: "propertyimage",
-//     }
-//   );
+class PropertyImage extends Model {}
 
-//   PropertyImage.associate = (models) => {
-//     PropertyImage.belongsTo(models.Property, { foreignKey: "property_id" });
-//   };
+PropertyImage.init(
+  {
+    image_id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    property_id: { type: DataTypes.INTEGER, allowNull: false },
+    image_url: { type: DataTypes.STRING, allowNull: false },
+    uploaded_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
+  },
+  {
+    sequelize: databaz,
+    modelName: "PropertyImage",
+    tableName: "property_images",
+    timestamps: false,
+  }
+);
 
-//   return PropertyImage;
+PropertyImage.associate = (models) => {
+  PropertyImage.belongsTo(models.Property, { foreignKey: "property_id" });
+};
+
+module.exports = PropertyImage;
