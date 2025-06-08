@@ -18,7 +18,6 @@ const placeBid = async (req, res) => {
     auction.current_price = amount;
     await auction.save();
 
-    // ✅ Fetch user details to include in socket message
     const user = await User.findByPk(user_id, { attributes: ["name"] });
 
     io.emit("new-bid", {
@@ -26,7 +25,7 @@ const placeBid = async (req, res) => {
       user_id,
       amount,
       created_at: new Date(),
-      User: user, // ✅ Now defined correctly
+      User: user,
     });
 
     res.status(201).json({ message: "Bid placed", data: bid });
