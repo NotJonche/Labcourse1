@@ -13,7 +13,7 @@ Role.init(
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true, // e.g., 'admin', 'user', 'moderator'
+      unique: true, // e.g., 'admin', 'user', 'agent'
     },
   },
   {
