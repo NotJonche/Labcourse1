@@ -59,9 +59,6 @@ const SignUp = async (req, res) => {
 
     const token = createToken(newUser.user_id);
 
-    // Optional: add logging after you confirm this works
-    // await Log.create({ user_id: newUser.user_id, action: "signup", details: `User ${newUser.email} registered.` });
-
     return res.status(201).json({ status: 1, data: newUser, token });
   } catch (err) {
     console.error("Signup error:", err);
@@ -70,6 +67,9 @@ const SignUp = async (req, res) => {
       .json({ status: 0, data: err.message || "Internal server error" });
   }
 };
+
+//Login 
+
 const Login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -90,7 +90,6 @@ const Login = async (req, res) => {
       expiresIn: "3d",
     });
 
-    // ✅ Log the login activity BEFORE sending the response
     await Log.create({
       user_id: user.user_id,
       action: "login",
